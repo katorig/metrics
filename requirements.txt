@@ -1,0 +1,6 @@
+python==3.7.3
+pandas
+numpy
+teradatasql==17.0.0.8
+toml
+dynaconf

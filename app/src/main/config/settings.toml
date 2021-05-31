@@ -1,0 +1,20 @@
+[default]
+teradata_host = 'td2800.corp.tele2.ru'
+teradata_driver = '/opt/teradata/client/ODBC_64/lib/tdataodbc_sb64.so'
+email_send_from = 'dvv_monitoring@info.tele2.ru'
+
+[development]
+
+    [development.segmentation]
+    email_send_to = 'ekaterina.gruzdova@tele2.ru'
+    subject = 'Недоступен скоринг модели {0} за {1}'
+    message = """
+Добрый день, коллеги!
+
+Отсутствуют результаты скоринга модели {0} за актуальную дату.
+Требуется перезапуск модели и диагностика ситуации."""
+
+[production]
+
+    [production.segmentation]
+
