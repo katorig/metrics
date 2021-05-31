@@ -1,8 +1,10 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+**/__pycache__/
+*.py[cod]
+
 .idea/
 data/
 metastore_db/
 project/
 spark-warehouse/
-__pycache__/
-*/__pycache__/
-*/*/__pycache__/
