@@ -21,8 +21,8 @@ def parse_argument():
     return args.model_id, args.report_date
 
 
-def check_if_results_appear_in_all_teradata_prod_tables(model_id, report_date):
-    mon = LoadDataFrame(model_id, report_date)
+def check_if_results_appear_in_all_teradata_prod_tables(db, model_id, report_date):
+    mon = LoadDataFrame(db, model_id, report_date)
     mon.get_df_with_rows_count('prd_dm.scoring')
     time.sleep(60 * 60 * 2)
     mon.get_df_with_rows_count('prd2_dds_v.scoring')
@@ -32,9 +32,9 @@ def check_if_results_appear_in_all_teradata_prod_tables(model_id, report_date):
 
 if __name__ == '__main__':
     model_id, report_date = parse_argument()
-    # model_id = 135
-    # report_date = '2021-05-28'
     retro_date = '2021-02-17'
-    mtr = Metrics(model_id, report_date)
-    print(mtr.get_stats_on_cnt_table('prd2_dds_v.scoring', 'mean', retro_date=retro_date))
-    # check_if_results_appear_in_all_teradata_prod_tables(model_id, report_date)
+    db = 'teradata'
+
+    mtr = Metrics(db, model_id, report_date)
+    mtr.compare_difference_in_rows_between_two_dfs('prd2_dds_v.scoring', 15, retro_date, report_date)
+    check_if_results_appear_in_all_teradata_prod_tables(db, model_id, report_date)

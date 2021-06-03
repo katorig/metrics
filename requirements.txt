@@ -3,3 +3,7 @@ pandas==0.25.3
 numpy==1.20.3
 toml==0.10.2
 dynaconf==3.1.4
+pyhive
+thrift_sasl>=0.4.2
+pure_transport
+kerberos
