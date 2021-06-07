@@ -1,5 +1,5 @@
 from pandas import DataFrame
-from turbodbc import connect, make_options, Megabytes
+import teradatasql
 import os
 from dynaconf import settings
 
@@ -16,24 +16,19 @@ class TeradataService:
     def execute_query(self, operation):
         with self._con.cursor() as cursor:
             cursor.execute(operation)
-            table = DataFrame(cursor.fetchallnumpy())
-            table.columns = table.columns.str.lower()
+            table = DataFrame(cursor.fetchall(),
+                              columns=[x[0] for x in cursor.description])
             return table
 
     def execute_ddl(self, operation):
         with self._con.cursor() as cursor:
             cursor.execute(operation)
 
-    @staticmethod
-    def _create_string():
-        return f"""DBCName={settings.TERADATA_HOST};CharacterSet=UTF8;
-Driver={settings.TERADATA_DRIVER};UID={TERADATA_USER};PWD={TERADATA_PASSWORD}"""
-
     def _connect(self):
-        return connect(connection_string=self._create_string(),
-                       turbodbc_options=make_options(read_buffer_size=Megabytes(42),
-                                                     use_async_io=True,
-                                                     prefer_unicode=True), **self._kwargs)
+        return teradatasql.connect(None,
+                                   host=settings.TERADATA_HOST,
+                                   user=TERADATA_USER,
+                                   password=TERADATA_PASSWORD)
 
     def __enter__(self):
         self._con = self._connect()

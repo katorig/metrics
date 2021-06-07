@@ -24,7 +24,7 @@ class LoadDataFrame:
         with self.db as service:
             df = service.execute_query(query)
         if df.empty:
-            logger.error(f"Error! No data found in table {table_name}!")  # TODO: rewrite to throw exception
+            logger.error(f"Error! No data found in table {table_name}! Query: {query}")  # TODO: rewrite to throw exception
             sys.exit(1)
         logger.info(f"Table {table_name} contains necessary data.")
         return df

@@ -13,7 +13,8 @@ class HiveService:
     def execute_query(self, operation):
         with self._con.cursor() as cursor:
             cursor.execute(operation)
-            table = DataFrame(cursor.fetchall(), columns=[x[0].split('.')[1] for x in cursor.description])
+            table = DataFrame(cursor.fetchall(),
+                              columns=[x[0] for x in cursor.description])
             return table
 
     def execute_ddl(self, operation):

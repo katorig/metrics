@@ -1,6 +1,5 @@
 [default]
 teradata_host = 'td2800.corp.tele2.ru'
-teradata_driver = '/opt/teradata/client/ODBC_64/lib/tdataodbc_sb64.so'
 email_send_from = 'dvv_monitoring@info.tele2.ru'
 hadoop_host = 't2ru-bda-mnp-001.corp.tele2.ru'
 hadoop_port = 10000

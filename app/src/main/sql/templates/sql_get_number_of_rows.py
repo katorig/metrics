@@ -6,7 +6,6 @@ def count_rows_for_report_date(table_name,
     FROM {table_name}
     WHERE model_id = {model_id} AND report_date = DATE'{report_date}'
     GROUP BY report_date, model_id
-    ;
     """
     print(count_rows)
     return count_rows
@@ -25,7 +24,16 @@ def count_rows_for_retro(table_name,
     FROM {table_name}
     WHERE model_id = {model_id} AND {date_expression}
     GROUP BY report_date, model_id
-    ;
     """
     print(count_rows)
     return count_rows
+
+
+def count_duplicates(table_name, col_name):
+    query = f"""
+    SELECT Count(*) AS cnt
+    FROM {table_name}
+    GROUP BY {col_name}
+    HAVING Cnt > 1
+    """
+    return query
