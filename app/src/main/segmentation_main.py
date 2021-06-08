@@ -1,7 +1,7 @@
 import argparse
 
 from metrics.dataframe_loader import LoadDataFrame
-from metrics.metrics import compare_new_df_with_retro, check_df_for_duplicates
+from metrics.metrics import Metrics
 import time
 from dynaconf import settings
 import datetime as dt
@@ -26,24 +26,23 @@ def parse_argument():
 
 
 def check_if_results_appear_in_all_teradata_prod_tables(db, model_id, report_date):
-    mon = LoadDataFrame(db, model_id, report_date)
-    mon.get_df_with_rows_count('prd_dm.scoring')
+    mtr = Metrics('ekaterina.gruzdova@tele2.ru', 'Check scoring tables', 'error')
+    mtr.check_if_data_in_table(db, model_id, 'prd_dm.scoring', report_date=report_date)
     time.sleep(60 * 60 * 2)
-    mon.get_df_with_rows_count('prd2_dds_v.scoring')
+    mtr.check_if_data_in_table(db, model_id, 'prd2_dds_v.scoring', report_date=report_date)
     time.sleep(60 * 60 * 24)
-    mon.get_df_with_rows_count('prd2_bds_v.subs_score_current')
+    mtr.check_if_data_in_table(db, model_id, 'prd2_bds_v.subs_score_current', report_date=report_date)
 
 
 if __name__ == '__main__':
-    # model_id, report_date = parse_argument()
-    # for i in settings:
-    #     print(i)
     model_id = 135
     report_date = '2021-06-04'
     retro_date = str((dt.datetime.strptime(report_date, '%Y-%m-%d') - dt.timedelta(days=90)).date())
     print(retro_date)
 
-    check_df_for_duplicates('hadoop', model_id, report_date, 'developers.eg_msg_traf_1', 'subs_id')
-    compare_new_df_with_retro(model_id, 'developers.eg_msg_traf_1', 'hadoop', 'prd2_dds_v.scoring', 'teradata',
-                              15, retro_date, report_date)
-    # check_if_results_appear_in_all_teradata_prod_tables(db, model_id, report_date)
+    # dpl = Metrics('ekaterina.gruzdova@tele2.ru', 'Data contains duplicates', 'error')
+    # dpl.check_df_for_duplicates('hadoop', 'developers.eg_msg_traf_1', 'subs_id')
+    rtr = Metrics('ekaterina.gruzdova@tele2.ru', 'Big difference in dataframes', 'error')
+    rtr.compare_new_df_with_retro(model_id, 'developers.eg_msg_traf_1', 'hadoop', 'prd2_dds_v.scoring', 'teradata',
+                                  15, retro_date, report_date)
+    # check_if_results_appear_in_all_teradata_prod_tables('teradata', model_id, report_date)

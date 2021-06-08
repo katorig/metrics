@@ -2,7 +2,7 @@ def count_rows_for_report_date(table_name,
                                model_id,
                                report_date):
     count_rows = f"""
-    SELECT Count(*) as cnt, report_date, model_id
+    SELECT Count(*) as cnt
     FROM {table_name}
     WHERE model_id = {model_id} AND report_date = DATE'{report_date}'
     GROUP BY report_date, model_id
@@ -20,7 +20,7 @@ def count_rows_for_retro(table_name,
     elif report_date is None:
         date_expression = f"report_date = DATE'{retro_date}'"
     count_rows = f"""
-    SELECT Count(*) as cnt, report_date, model_id
+    SELECT Count(*) as cnt
     FROM {table_name}
     WHERE model_id = {model_id} AND {date_expression}
     GROUP BY report_date, model_id
