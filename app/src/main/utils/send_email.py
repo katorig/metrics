@@ -22,9 +22,10 @@ def notification(*email_args):
     def decorator(func):
         def wrapper(*args, **kwargs):
             result = func(*args, **kwargs)
-            if result == 'Error! Send notification':
-                send_email(*email_args)
-                sys.exit(1)
+            if email_args[0] is not None:
+                if result == 'Error! Send notification':
+                    send_email(*email_args)
+                    sys.exit(1)
             return result
         return wrapper
     return decorator

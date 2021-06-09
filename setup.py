@@ -1,5 +1,7 @@
 from os.path import dirname, join
 from setuptools import setup, find_packages
+from dynaconf import settings
+import argparse
 
 PROJECT_NAME = "dvv_monitoring"
 SOURCES_DIR = "app/src"
@@ -9,6 +11,17 @@ def read(*names, **kwargs):
     this_directory = dirname(__file__)
     with open(join(this_directory, *names), encoding=kwargs.get("encoding", "utf8")) as fh:
         return fh.read()
+
+
+def parse_argument():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('model_id', metavar='model_id', type=int, help='Please type model_id')
+    parser.add_argument('report_date', metavar='report_date', type=str,
+                        help="Please type report_date in 'YYYY-MM-DD' format")
+    args = parser.parse_args()
+    settings.MODEL_ID = args.model_id
+    settings.REPORT_DATE = args.report_date
+    return args.model_id, args.report_date
 
 
 def read_version(path):
