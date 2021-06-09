@@ -9,4 +9,3 @@ sasl_auth = 'GSSAPI'
 [development]
 
 [production]
-

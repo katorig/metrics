@@ -23,7 +23,7 @@ def check_if_results_appear_in_all_teradata_prod_tables(db, model_id, report_dat
 if __name__ == '__main__':
     model_id = 135
     report_date = '2021-06-04'
-    retro_date = str((dt.datetime.strptime(report_date, '%Y-%m-%d') - dt.timedelta(days=90)).date())
+    retro_date = str((dt.datetime.strptime(report_date, '%Y-%m-%d') - dt.timedelta(days=100)).date())
 
     mtr = Metrics()
     mtr.check_df_for_duplicates('hadoop', 'developers.eg_msg_traf_1', 'subs_id', send_to='ekaterina.gruzdova@tele2.ru',

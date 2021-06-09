@@ -31,7 +31,7 @@ def count_rows_for_retro(table_name,
 
 def count_duplicates(table_name, col_name):
     query = f"""
-    SELECT count(*) FROM (
+    SELECT Count(*) FROM (
     SELECT Count(*) AS cnt
     FROM {table_name}
     GROUP BY {col_name}
