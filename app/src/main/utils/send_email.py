@@ -24,5 +24,5 @@ def notification(func):
             if result == 'Error! Send notification':
                 send_email(kwargs)
                 sys.exit(1)
-            return result
+        return result
     return wrapper

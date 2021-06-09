@@ -17,12 +17,13 @@ class Metrics:
         return value
 
     @staticmethod
-    def compare_two_numbers(old_value, new_value, threshold: int):
+    def compare_two_numbers(old_value, new_value, threshold: int) -> bool:
         share = round((new_value - old_value) / old_value * 100, 3)
         if share >= threshold or share <= -threshold:
             logger.error(f"Big difference between two values: {share}%! Check sources.")
             return False
         logger.info(f"Difference between two values is {share} %")
+        return True
 
     @notification
     def compare_new_df_with_retro(self, model_id,
@@ -50,6 +51,6 @@ class Metrics:
     def check_df_for_duplicates(self, db, table_name: str, col_name: str, **kwargs):
         ldf = LoadDataFrame(db)
         df = ldf.load_data(count_duplicates(table_name, col_name))
-        if df.empty is False:
+        if df['cnt'][0] != 0:
             logger.error(f"Results of scoring contain duplicates in {table_name}. Check scoring process.")
             return self.notify
