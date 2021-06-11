@@ -1,0 +1,10 @@
+name: 'tele2-metrics'
+owner: 'MLE'
+email:
+  - 'ekaterina.gruzdova@tele2.ru'
+schedule_interval: 'None'
+image: container.t2ru-bda-wds-008.corp.tele2.ru/bigdata-spark:2.6.4
+secrets: ['hadoop-creds']
+secret_files: ['hadoop-keytab']
+command: bash -c "chmod +x run.sh && ./run.sh"
+user: 0

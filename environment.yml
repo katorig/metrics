@@ -1,0 +1,17 @@
+name: tele2-metrics
+channels:
+  - defaults
+  - conda-forge
+dependencies:
+  - python=3.7.3
+  - pip
+  - pandas==0.25.3
+  - numpy==1.20.3
+  - toml==0.10.2
+  - thrift_sasl>=0.4.2
+  - pyhive==0.6.1
+  - pip:
+      - dynaconf==3.1.4
+      - pure-transport==0.1.0
+      - kerberos==1.3.1
+      - teradatasql==17.0.0.8

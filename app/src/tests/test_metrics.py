@@ -1,4 +1,4 @@
-from main.metrics.metrics import Metrics
+from ..main.metrics.metrics import Metrics
 import unittest
 import pandas as pd
 

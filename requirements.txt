@@ -7,3 +7,4 @@ pyhive
 thrift_sasl>=0.4.2
 pure_transport
 kerberos
+teradatasql
