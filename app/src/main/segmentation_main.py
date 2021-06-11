@@ -12,12 +12,12 @@ def check_if_results_appear_in_all_teradata_prod_tables(db, model_id, report_dat
     text = 'error'
     mtr.check_if_data_in_table(*a, 'prd_dm.scoring', report_date=report_date,
                                send_to=send_to, subject=subject.format('prd_dm.scoring'), text=text)
-    time.sleep(60 * 60 * 2)
-    mtr.check_if_data_in_table(*a, 'prd2_dds_v.scoring', report_date=report_date,
-                               send_to=send_to, subject=subject.format('prd2_dds_v.scoring'), text=text)
-    time.sleep(60 * 60 * 24)
-    mtr.check_if_data_in_table(*a, 'prd2_bds_v.subs_score_current', report_date=report_date,
-                               send_to=send_to, subject=subject.format('prd2_bds_v.subs_score_current'), text=text)
+    # time.sleep(60 * 60 * 2)
+    # mtr.check_if_data_in_table(*a, 'prd2_dds_v.scoring', report_date=report_date,
+    #                            send_to=send_to, subject=subject.format('prd2_dds_v.scoring'), text=text)
+    # time.sleep(60 * 60 * 24)
+    # mtr.check_if_data_in_table(*a, 'prd2_bds_v.subs_score_current', report_date=report_date,
+    #                            send_to=send_to, subject=subject.format('prd2_bds_v.subs_score_current'), text=text)
 
 
 if __name__ == '__main__':

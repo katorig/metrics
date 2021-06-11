@@ -20,11 +20,14 @@ class TestLoadDataFrame(unittest.TestCase):
         df_h = l.load_data("SELECT * FROM geo.track limit 2")
         self.assertEqual(df_h.shape[0], 2)
 
-    def test_get_df_with_rows_count(self):
+    def test_get_df_with_rows_count_hadoop(self):
         l = LoadDataFrame('hadoop')
         df = l.get_df_with_rows_count('geo.track', expr=f'WHERE start_dttm_year = 2021 and start_dttm_month = 6 and start_dttm_day = 4')
         self.assertEqual(df['cnt'][0], 645579769)
 
+    def test_get_df_with_rows_count_teradata(self):
+        l = LoadDataFrame('teradata')
+        df = l.get_df_with_rows_count()
 
 if __name__ == '__main__':
     unittest.main()
