@@ -1,5 +1,7 @@
 #!/bin/bash
 
+yum install gcc gcc-c++ cyrus-sasl-devel
+
 export conda_env=app-env
 conda env create -f environment.yml -n ${conda_env} && conda clean -af
 
