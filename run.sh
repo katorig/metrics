@@ -1,6 +1,6 @@
 #!/bin/bash
 
-yum install gcc gcc-c++ cyrus-sasl-devel
+yum groupinstall -y "Development Tools" && yum install gcc gcc-c++ python3-devel.x86_64 cyrus-sasl-devel
 
 export conda_env=app-env
 conda env create -f environment.yml -n ${conda_env} && conda clean -af
