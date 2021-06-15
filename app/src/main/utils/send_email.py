@@ -7,9 +7,9 @@ from dynaconf import settings
 
 def send_email(kwargs) -> None:
     msg = MIMEMultipart()
+    msg['To'] = kwargs['send_to']
     msg['Subject'] = kwargs['subject']
     msg['From'] = settings.SEND_EMAIL_FROM
-    msg['To'] = kwargs['send_to']
     msg_text = MIMEText(kwargs['text'], 'plain')
     msg.attach(msg_text)
     s = smtplib.SMTP('webmail.tele2.ru')
@@ -20,9 +20,11 @@ def send_email(kwargs) -> None:
 def notification(func):
     def wrapper(*args, **kwargs):
         result = func(*args, **kwargs)
-        if kwargs.__contains__('send_to'):
+        if kwargs['send_to'] is not None:
             if result == 'Error! Send notification':
                 send_email(kwargs)
                 sys.exit(1)
+        else:
+            sys.exit(1)
         return result
     return wrapper

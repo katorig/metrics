@@ -45,8 +45,6 @@ if __name__ == "__main__":
         python_requires=" >= 3.7.3",  # TODO: change Python version?
         install_requires=read("requirements.txt"),
         test_suite="tests",
-        tests_requires=[
-        ],
 
         description="This library is for monitoring models health and data validation.",
         long_description=read("README.md"),
@@ -56,6 +54,6 @@ if __name__ == "__main__":
         url="https://gitlab.tdp.corp.tele2.ru/mle/monitoring/tele2_dvv_monitoring",
         keywords=["bigdata", "monitoring", "metrics", "alerts", "dvv"],
         classifiers=[
-            "Programming Language :: Python :: 3.7"  # TODO: change Python version?
+            "Programming Language :: Python :: 3.7.3"
         ]
     )

@@ -26,14 +26,12 @@ class TestMetrics(unittest.TestCase):
 
     def test_compare_new_df_with_retro(self):
         mtr = Metrics()
-        k = mtr.compare_new_df_with_retro(135, 'developers.eg_msg_traf_1', 'hadoop', 'prd2_dds_v.scoring', 'teradata',
-                                          15, '2021-03-04', '2021-06-04')
+        args = ['hadoop', 'developers.eg_msg_traf_1', 'teradata', 'prd2_dds_v.scoring']
+        k = mtr.compare_new_df_with_retro(135, *args, 15, '2021-03-04', '2021-06-04')
         self.assertEqual('Error! Send notification', k)
-        mtr.compare_new_df_with_retro(135, 'developers.eg_msg_traf_1', 'hadoop', 'prd2_dds_v.scoring', 'teradata',
-                                      15, '2021-03-04', '2021-06-04', send_to=send_to,
+        mtr.compare_new_df_with_retro(135, *args, 15, '2021-03-04', '2021-06-04', send_to=send_to,
                                       subject='Big difference in dataframes', text=text)
-        b = mtr.compare_new_df_with_retro(135, 'developers.eg_msg_traf_1', 'hadoop', 'prd2_dds_v.scoring', 'teradata',
-                                          1000, '2021-03-04', '2021-06-04')
+        b = mtr.compare_new_df_with_retro(135, *args, 1000, '2021-03-04', '2021-06-04')
         self.assertIsNone(b)
 
     def test_check_if_data_in_table(self):

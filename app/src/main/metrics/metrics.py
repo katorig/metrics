@@ -27,7 +27,7 @@ class Metrics:
 
     @notification
     def compare_new_df_with_retro(self, model_id,
-                                  table_name, db_1, scoring_table_name, db_2,
+                                  db_1, table_name, db_2, scoring_table_name,
                                   threshold, retro_date,
                                   report_date, **kwargs):
         actual_df = LoadDataFrame(db_1).get_df_with_rows_count(table_name, model_id, report_date)
