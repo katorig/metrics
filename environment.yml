@@ -8,13 +8,13 @@ dependencies:
   - pandas==0.25.3
   - numpy==1.20.3
   - toml==0.10.2
-  - pure-sasl
   - krb5
+  - pyhive==0.6.1
   - pip:
+    - pure-sasl==0.6.2
     - dynaconf==3.1.4
     - kerberos==1.3.1
-    - thrift
+    - thrift==0.13.0
     - thrift_sasl==0.4.2
-    - pyhive==0.6.1
-    - pure-transport==0.1.0
+    - pure-transport==0.2.0
     - teradatasql==17.0.0.8
