@@ -1,6 +1,7 @@
 from main.metrics.dataframe_loader import LoadDataFrame
 import unittest
 import pandas as pd
+from dynaconf import settings
 
 
 class TestLoadDataFrame(unittest.TestCase):
@@ -22,17 +23,20 @@ class TestLoadDataFrame(unittest.TestCase):
 
     def test_get_df_with_rows_count_expr(self):
         l = LoadDataFrame('hadoop')
-        df = l.get_df_with_rows_count('geo.track', expr=f'WHERE start_dttm_year = 2021 and start_dttm_month = 6 and start_dttm_day = 4')
+        df = l.get_df_with_rows_count('df_with_expr', 'geo.track', expr=f'WHERE start_dttm_year = 2021 and start_dttm_month = 6 and start_dttm_day = 4')
         self.assertEqual(df['cnt'][0], 645579769)
 
     def test_get_df_with_rows_count_dates(self):
         l = LoadDataFrame('teradata')
         t = 'prd2_dds_v.scoring'
-        df_1 = l.get_df_with_rows_count(t, 394, retro_date='2021-02-17', report_date='2021-05-17')
+        settings.M_REPORT_DATE = '2021-05-17'
+        settings.M_RETRO_DATE = '2021-02-17'
+        settings.M_MODEL_ID = 394
+        df_1 = l.get_df_with_rows_count('retro_df_with_delta', t)
         self.assertGreater(len(df_1['cnt']), 1)
-        df_2 = l.get_df_with_rows_count(t, 394, retro_date='2021-02-17')
+        df_2 = l.get_df_with_rows_count('retro_df', t)
         self.assertEqual(len(df_2['cnt']), 1)
-        df_3 = l.get_df_with_rows_count(t, 394, report_date='2021-05-17')
+        df_3 = l.get_df_with_rows_count('actual_df', t)
         self.assertEqual(len(df_3['cnt']), 1)
 
 

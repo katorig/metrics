@@ -2,6 +2,7 @@ from sql.templates.sql_get_number_of_rows import count_rows_for_report_date, cou
 from readers.teradata_reader import TeradataService
 from readers.hadoop_reader import HiveService
 from utils.logs_maker import init_logger
+from dynaconf import settings as envs
 
 logger = init_logger(__name__)
 
@@ -20,15 +21,14 @@ class LoadDataFrame:
         return df
 
     def get_df_with_rows_count(self,
+                               condition: str,
                                table_name: str,
-                               model_id: int = None,
-                               retro_date: str = None,
-                               report_date: str = None,
                                expr: str = None):
-        if model_id is None:
+        if condition == 'actual_df':
+            return self.load_data(count_rows_for_report_date(table_name, envs.M_MODEL_ID, report_date=envs.M_REPORT_DATE))
+        elif condition == 'retro_df':
+            return self.load_data(count_rows_for_retro(table_name, envs.M_MODEL_ID, envs.M_RETRO_DATE))
+        elif condition == 'retro_df_with_delta':
+            return self.load_data(count_rows_for_retro(table_name, envs.M_MODEL_ID, envs.M_RETRO_DATE, envs.M_REPORT_DATE))
+        elif condition == 'df_with_expr':
             return self.load_data(count_rows_with_expr(table_name, expr))
-        else:
-            if retro_date:
-                return self.load_data(count_rows_for_retro(table_name, model_id, retro_date, report_date))
-            elif retro_date is None:
-                return self.load_data(count_rows_for_report_date(table_name, model_id, report_date))

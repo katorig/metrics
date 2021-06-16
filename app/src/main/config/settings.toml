@@ -6,7 +6,3 @@ hadoop_port = 10000
 kerberos_service_name = 'hive'
 sasl_auth = 'GSSAPI'
 
-[development]
-
-[production]
-

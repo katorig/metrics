@@ -21,6 +21,7 @@ def notification(func):
     def wrapper(*args, **kwargs):
         result = func(*args, **kwargs)
         if kwargs['send_to'] is not None:
+            print(kwargs['send_to'])
             if result == 'Error! Send notification':
                 send_email(kwargs)
                 sys.exit(1)

@@ -2,6 +2,7 @@ from metrics.dataframe_loader import LoadDataFrame
 from utils.logs_maker import init_logger
 from sql.templates.sql_get_number_of_rows import count_duplicates
 from utils.send_email import notification
+from dynaconf import settings as envs
 
 logger = init_logger(__name__)
 
@@ -26,31 +27,29 @@ class Metrics:
         return True
 
     @notification
-    def compare_new_df_with_retro(self, model_id,
-                                  db_1, table_name, db_2, scoring_table_name,
-                                  threshold, retro_date,
-                                  report_date, **kwargs):
-        actual_df = LoadDataFrame(db_1).get_df_with_rows_count(table_name, model_id, report_date)
-        retro_df = LoadDataFrame(db_2).get_df_with_rows_count(scoring_table_name, model_id, retro_date, report_date)
+    def compare_new_df_with_retro(self, which_retro: str, **kwargs):
+        actual_df = LoadDataFrame(envs.M_STAGE_DB)\
+            .get_df_with_rows_count('actual_df', envs.M_STAGE_TABLE)
+        retro_df = LoadDataFrame(envs.M_FINAL_DB)\
+            .get_df_with_rows_count(which_retro, envs.M_FINAL_TABLE)
         bool = self.compare_two_numbers(self.get_statistics_metric(retro_df, 'cnt', 'mean'),
                                         self.get_statistics_metric(actual_df, 'cnt', 'mean'),
-                                        threshold)
+                                        envs.M_THRESHOLD)
         if bool is False:
             return self.notify
 
     @notification
-    def check_if_data_in_table(self, db_1, model_id, table_name,
-                               retro_date: str = None, report_date: str = None, **kwargs):
-        ldf = LoadDataFrame(db_1)
-        df = ldf.get_df_with_rows_count(table_name, model_id, retro_date, report_date)
+    def check_if_data_in_table(self, **kwargs):
+        ldf = LoadDataFrame(envs.M_FINAL_DB)
+        df = ldf.get_df_with_rows_count('actual_df', envs.M_FINAL_TABLE)
         if df.empty:
-            logger.error(f"No data found in {table_name}!")
+            logger.error(f"No data found in {envs.M_FINAL_TABLE}!")
             return self.notify
 
     @notification
-    def check_df_for_duplicates(self, db, table_name: str, col_name: str, **kwargs):
-        ldf = LoadDataFrame(db)
-        df = ldf.load_data(count_duplicates(table_name, col_name))
+    def check_df_for_duplicates(self, **kwargs):
+        ldf = LoadDataFrame(envs.M_STAGE_DB)
+        df = ldf.load_data(count_duplicates(envs.M_STAGE_TABLE, envs.M_COLUMN))
         if df['cnt'][0] != 0:
-            logger.error(f"Results of scoring contain duplicates in {table_name}. Check scoring process.")
+            logger.error(f"Results of scoring contain duplicates in {envs.M_STAGE_TABLE}. Check scoring process.")
             return self.notify
