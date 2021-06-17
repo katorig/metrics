@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 from metrics.metrics import Metrics
 from argparse import ArgumentParser
 from dynaconf import settings
