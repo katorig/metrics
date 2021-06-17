@@ -27,11 +27,11 @@ class Metrics:
         return True
 
     @notification
-    def compare_new_df_with_retro(self, which_retro: str, **kwargs):
+    def compare_new_df_with_retro(self, **kwargs):
         actual_df = LoadDataFrame(envs.M_STAGE_DB)\
             .get_df_with_rows_count('actual_df', envs.M_STAGE_TABLE)
         retro_df = LoadDataFrame(envs.M_FINAL_DB)\
-            .get_df_with_rows_count(which_retro, envs.M_FINAL_TABLE)
+            .get_df_with_rows_count('retro_df', envs.M_FINAL_TABLE)
         bool = self.compare_two_numbers(self.get_statistics_metric(retro_df, 'cnt', 'mean'),
                                         self.get_statistics_metric(actual_df, 'cnt', 'mean'),
                                         envs.M_THRESHOLD)

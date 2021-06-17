@@ -15,10 +15,7 @@ def count_rows_for_retro(table_name,
                          model_id,
                          retro_date,
                          report_date: str = None):
-    if report_date:
-        date_expression = f"report_date >= DATE'{retro_date}' AND report_date < DATE'{report_date}'"
-    elif report_date is None:
-        date_expression = f"report_date = DATE'{retro_date}'"
+    date_expression = f"report_date >= DATE'{retro_date}' AND report_date < DATE'{report_date}'"
     q = f"""
     SELECT Count(*) as cnt
     FROM {table_name}

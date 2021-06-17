@@ -27,8 +27,6 @@ class LoadDataFrame:
         if condition == 'actual_df':
             return self.load_data(count_rows_for_report_date(table_name, envs.M_MODEL_ID, report_date=envs.M_REPORT_DATE))
         elif condition == 'retro_df':
-            return self.load_data(count_rows_for_retro(table_name, envs.M_MODEL_ID, envs.M_RETRO_DATE))
-        elif condition == 'retro_df_with_delta':
             return self.load_data(count_rows_for_retro(table_name, envs.M_MODEL_ID, envs.M_RETRO_DATE, envs.M_REPORT_DATE))
         elif condition == 'df_with_expr':
             return self.load_data(count_rows_with_expr(table_name, expr))

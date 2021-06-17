@@ -32,10 +32,10 @@ class TestMetrics(unittest.TestCase):
         settings.M_MODEL_ID = 326
         settings.M_REPORT_DATE = '2021-05-17'
         settings.M_RETRO_DATE = '2021-03-17'
-        self.assertIsNone(mtr.compare_new_df_with_retro('retro_df_with_delta'))
+        self.assertIsNone(mtr.compare_new_df_with_retro())
         settings.M_THRESHOLD = 0
-        self.assertRaises(SystemExit, lambda: mtr.compare_new_df_with_retro('retro_df_with_delta'))
-        self.assertRaises(SystemExit, lambda: mtr.compare_new_df_with_retro('retro_df_with_delta', send_to=send_to,
+        self.assertRaises(SystemExit, lambda: mtr.compare_new_df_with_retro())
+        self.assertRaises(SystemExit, lambda: mtr.compare_new_df_with_retro(send_to=send_to,
                           subject='Big difference in dataframes', text=text))
 
     def test_check_if_data_in_table(self):
