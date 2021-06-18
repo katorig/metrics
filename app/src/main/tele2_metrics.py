@@ -13,8 +13,8 @@ def define_main_args_parser(choices_list: list) -> ArgumentParser:
     parser = ArgumentParser()
     parser.add_argument("method",
                         nargs="?",
-                        help="""Type name of method you want to run.
-Possible methods: check_df_for_duplicates, compare_new_df_with_retro, check_if_data_in_table.
+                        help=f"""Type name of method you want to run.
+Possible methods: {', '.join(choices_list[1:])}.
 Default method: no_function.
 If you want to send notification add --emails parameter.""",
                         choices=choices_list,
@@ -46,9 +46,7 @@ def call_compare_new_df_with_retro():
 
 
 def call_check_if_data_in_table():
-    mtr.check_if_data_in_table(send_to=args.emails, subject=f'{email_subj} Нет результатов в {settings.M_FINAL_TABLE}',
-                               text=f"""Модель отработала, но результаты не были доставлены в {settings.M_FINAL_TABLE}.
-    Проверьте модель""")
+    mtr.check_if_data_in_table(send_to=args.emails)
 
 
 if __name__ == '__main__':

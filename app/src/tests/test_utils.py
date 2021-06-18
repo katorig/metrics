@@ -1,7 +1,6 @@
 from main.utils.send_email import send_email, notification
 import unittest
-
-send_to = "ekaterina.gruzdova@tele2.ru"
+from dynaconf import settings
 
 
 class TestMetrics(unittest.TestCase):
@@ -20,23 +19,20 @@ class TestMetrics(unittest.TestCase):
                   "subject": "TEST", "text": "test"}
         self.assertEqual(send_email(kwargs), 'Notification was sent')
 
-    def test_do_not_send_email(self):
-        kwargs = {}
-        self.assertRaises(KeyError, lambda: send_email(kwargs))
-
     def test_notification(self):
         @notification
-        def foo(flag, **kwargs):
+        def foo(flag, notify=0):
             print('Function foo is working')
             if flag == 1:
-                return 'Error! Send notification'
+                text = 'test'
+                return 'Error! Stop', notify, text
             else:
-                return 'OK'
+                return 'OK GOOD'
 
-        self.assertRaises(SystemExit, lambda: foo(1, send_to=send_to, subject='TEST', text='test'))
-        self.assertEqual('OK', foo(0, send_to=send_to, subject='TEST', text='test'))
+        self.assertRaises(SystemExit, lambda: foo(1, 1))
+        self.assertEqual('OK GOOD', foo(0, 1))
         self.assertRaises(SystemExit, lambda: foo(1))
-        self.assertEqual('OK', foo(0))
+        self.assertEqual('OK GOOD', foo(0))
 
 
 if __name__ == '__main__':

@@ -39,12 +39,14 @@ class Metrics:
             return self.notify
 
     @notification
-    def check_if_data_in_table(self, **kwargs):
+    def check_if_data_in_table(self, notify: int = 0):
         ldf = LoadDataFrame(envs.M_FINAL_DB)
         df = ldf.get_df_with_rows_count('actual_df', envs.M_FINAL_TABLE)
+        text = f"""Модель отработала, но результаты не были доставлены в {envs.M_FINAL_TABLE}.
+Проверьте модель"""
         if df.empty:
-            logger.error(f"No data found in {envs.M_FINAL_TABLE}!")
-            return self.notify
+            logger.error(text)
+            return 'Error! Stop', notify, text
 
     @notification
     def check_df_for_duplicates(self, **kwargs):
