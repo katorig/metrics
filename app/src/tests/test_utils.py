@@ -1,6 +1,6 @@
 from main.utils.send_email import send_email, notification
 import unittest
-from dynaconf import settings
+from dynaconf import settings as envs
 
 
 class TestMetrics(unittest.TestCase):
@@ -11,16 +11,16 @@ class TestMetrics(unittest.TestCase):
         super().tearDown()
 
     def test_send_email(self):
-        settings.M_SEND_TO = "ekaterina.gruzdova@tele2.ru"
+        envs.M_SEND_TO = "ekaterina.gruzdova@tele2.ru"
         self.assertEqual(send_email(text='TEST'), 'Notification was sent')
 
     def test_send_email_to_many_people(self):
-        settings.M_SEND_TO = "ekaterina.gruzdova@tele2.ru, andrey.a.bogomolov@tele2.ru"
+        envs.M_SEND_TO = "ekaterina.gruzdova@tele2.ru, andrey.a.bogomolov@tele2.ru"
         self.assertEqual(send_email(text='TEST'), 'Notification was sent')
 
     def test_notification(self):
-        settings.M_SEND_TO = "ekaterina.gruzdova@tele2.ru"
-        settings.M_MODEL_ID = 'test'
+        envs.M_SEND_TO = "ekaterina.gruzdova@tele2.ru"
+        envs.M_MODEL_ID = 'test'
 
         @notification
         def foo(flag, notify=0):

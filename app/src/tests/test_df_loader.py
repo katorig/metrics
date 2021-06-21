@@ -1,7 +1,7 @@
 from main.metrics.dataframe_loader import LoadDataFrame
 import unittest
 import pandas as pd
-from dynaconf import settings
+from dynaconf import settings as envs
 
 
 class TestLoadDataFrame(unittest.TestCase):
@@ -29,9 +29,9 @@ class TestLoadDataFrame(unittest.TestCase):
     def test_get_df_with_rows_count_dates(self):
         l = LoadDataFrame('teradata')
         t = 'prd2_dds_v.scoring'
-        settings.M_REPORT_DATE = '2021-05-17'
-        settings.M_RETRO_DATE = '2021-02-17'
-        settings.M_MODEL_ID = 394
+        envs.M_REPORT_DATE = '2021-05-17'
+        envs.M_RETRO_DATE = '2021-02-17'
+        envs.M_MODEL_ID = 394
         df_1 = l.get_df_with_rows_count('retro_df_with_delta', t)
         self.assertGreater(len(df_1['cnt']), 1)
         df_2 = l.get_df_with_rows_count('retro_df', t)

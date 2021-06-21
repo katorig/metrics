@@ -2,7 +2,7 @@
 
 from metrics.metrics import Metrics
 from argparse import ArgumentParser
-from dynaconf import settings
+from dynaconf import settings as envs
 from utils.logs_maker import init_logger
 import sys
 
@@ -51,7 +51,6 @@ def call_check_if_data_in_table():
 
 if __name__ == '__main__':
     mtr = Metrics()
-    email_subj = f"Ошибка модели {settings.M_MODEL_ID}."
     dictionary = {"no_function": foo,
                   "check_df_for_duplicates": call_check_df_for_duplicates,
                   "compare_new_df_with_retro": call_compare_new_df_with_retro,

@@ -1,7 +1,7 @@
 from pandas import DataFrame
 from puretransport import transport_factory
 from pyhive.hive import connect
-from dynaconf import settings
+from dynaconf import settings as envs
 
 
 class HiveService:
@@ -22,9 +22,9 @@ class HiveService:
             cursor.execute(operation)
 
     def _connect(self):
-        transport = transport_factory(host=settings.HADOOP_HOST, port=settings.HADOOP_PORT,
-                                      kerberos_service_name=settings.KERBEROS_SERVICE_NAME,
-                                      sasl_auth=settings.SASL_AUTH, username=None, password=None,
+        transport = transport_factory(host=envs.HADOOP_HOST, port=envs.HADOOP_PORT,
+                                      kerberos_service_name=envs.KERBEROS_SERVICE_NAME,
+                                      sasl_auth=envs.SASL_AUTH, username=None, password=None,
                                       **self._kwargs)
         return connect(thrift_transport=transport)
 

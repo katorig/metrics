@@ -1,7 +1,7 @@
 from pandas import DataFrame
 import teradatasql
 import os
-from dynaconf import settings
+from dynaconf import settings as envs
 
 TERADATA_USER = os.environ.get('TERADATA_USER')
 TERADATA_PASSWORD = os.environ.get('TERADATA_PASSWORD')
@@ -26,7 +26,7 @@ class TeradataService:
 
     def _connect(self):
         return teradatasql.connect(None,
-                                   host=settings.TERADATA_HOST,
+                                   host=envs.TERADATA_HOST,
                                    user=TERADATA_USER,
                                    password=TERADATA_PASSWORD)
 

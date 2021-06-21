@@ -2,14 +2,14 @@ import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 import sys
-from dynaconf import settings
+from dynaconf import settings as envs
 
 
 def send_email(text='error, empty text') -> str:
     msg = MIMEMultipart()
-    msg['To'] = settings.M_SEND_TO
-    msg['Subject'] = f'Ошибка модели {settings.M_MODEL_ID}'
-    msg['From'] = settings.SEND_EMAIL_FROM
+    msg['To'] = envs.M_SEND_TO
+    msg['Subject'] = f'Ошибка модели {envs.M_MODEL_ID}'
+    msg['From'] = envs.SEND_EMAIL_FROM
     msg_text = MIMEText(text, 'plain')
     msg.attach(msg_text)
     s = smtplib.SMTP('webmail.tele2.ru')
