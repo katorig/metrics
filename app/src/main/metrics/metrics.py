@@ -8,9 +8,6 @@ logger = init_logger(__name__)
 
 
 class Metrics:
-    def __init__(self):
-        self.notify = 'Error! Send notification'
-
     @staticmethod
     def get_statistics_metric(df, col, statistics_metric):
         value = getattr(df[col], statistics_metric)()
@@ -27,31 +24,31 @@ class Metrics:
         return True
 
     @notification
-    def compare_new_df_with_retro(self, **kwargs):
+    def compare_new_df_with_retro(self, notify: int = 0):
         actual_df = LoadDataFrame(envs.M_STAGE_DB)\
             .get_df_with_rows_count('actual_df', envs.M_STAGE_TABLE)
         retro_df = LoadDataFrame(envs.M_FINAL_DB)\
-            .get_df_with_rows_count('retro_df', envs.M_FINAL_TABLE)
+            .get_df_with_rows_count(envs.M_RETRO_TYPE, envs.M_FINAL_TABLE)
         bool = self.compare_two_numbers(self.get_statistics_metric(retro_df, 'cnt', 'mean'),
                                         self.get_statistics_metric(actual_df, 'cnt', 'mean'),
                                         envs.M_THRESHOLD)
         if bool is False:
-            return self.notify
+            logger.error(error_text_compare_with_retro)
+            return 'Error! Stop', notify, error_text_compare_with_retro
 
     @notification
     def check_if_data_in_table(self, notify: int = 0):
         ldf = LoadDataFrame(envs.M_FINAL_DB)
         df = ldf.get_df_with_rows_count('actual_df', envs.M_FINAL_TABLE)
-        text = f"""Модель отработала, но результаты не были доставлены в {envs.M_FINAL_TABLE}.
-Проверьте модель"""
+        text = error_text_no_data
         if df.empty:
             logger.error(text)
             return 'Error! Stop', notify, text
 
     @notification
-    def check_df_for_duplicates(self, **kwargs):
+    def check_df_for_duplicates(self, notify: int = 0):
         ldf = LoadDataFrame(envs.M_STAGE_DB)
         df = ldf.load_data(count_duplicates(envs.M_STAGE_TABLE, envs.M_COLUMN))
         if df['cnt'][0] != 0:
-            logger.error(f"Results of scoring contain duplicates in {envs.M_STAGE_TABLE}. Check scoring process.")
-            return self.notify
+            logger.error(error_text_duplicates)
+            return 'Error! Stop', notify, error_text_duplicates

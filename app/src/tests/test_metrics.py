@@ -35,25 +35,21 @@ class TestMetrics(unittest.TestCase):
         self.assertIsNone(mtr.compare_new_df_with_retro())
         envs.M_THRESHOLD = 0
         self.assertRaises(SystemExit, lambda: mtr.compare_new_df_with_retro())
-        self.assertRaises(SystemExit, lambda: mtr.compare_new_df_with_retro(send_to=send_to,
-                          subject='Big difference in dataframes', text=text))
+        self.assertRaises(SystemExit, lambda: mtr.compare_new_df_with_retro(1))
 
     def test_check_if_data_in_table(self):
         mtr = Metrics()
         envs.M_MODEL_ID = 326
         envs.M_REPORT_DATE = '2300-03-17'
         self.assertRaises(SystemExit, lambda: mtr.check_if_data_in_table())
-        self.assertRaises(SystemExit, lambda: mtr.check_if_data_in_table(send_to=send_to,
-                          subject='No data in table {}!'.format('prd2_dds_v.scoring'), text=text))
+        self.assertRaises(SystemExit, lambda: mtr.check_if_data_in_table(1))
         envs.M_REPORT_DATE = '2021-03-17'
         self.assertIsNone(mtr.check_if_data_in_table())
 
     def test_check_df_for_duplicates(self):
         mtr = Metrics()
         self.assertRaises(SystemExit, lambda: mtr.check_df_for_duplicates())
-        self.assertRaises(SystemExit, lambda: mtr.check_df_for_duplicates(send_to=send_to,
-                          subject='Data contains duplicates in {}!'.format('developers.eg_msg_traf_1'),
-                          text=text))
+        self.assertRaises(SystemExit, lambda: mtr.check_df_for_duplicates(1))
         envs.M_STAGE_DB = 'teradata'
         envs.M_STAGE_TABLE = 'PRD2_TMD_V.BDS_LOAD_STATUS'
         envs.M_COLUMN = 'table_name'

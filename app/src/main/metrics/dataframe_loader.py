@@ -1,8 +1,7 @@
-from sql.templates.sql_get_number_of_rows import count_rows_for_report_date, count_rows_for_retro, count_rows_with_expr
+from sql.templates.sql_get_number_of_rows import *
 from readers.teradata_reader import TeradataService
 from readers.hadoop_reader import HiveService
 from utils.logs_maker import init_logger
-from dynaconf import settings as envs
 
 logger = init_logger(__name__)
 

@@ -21,9 +21,10 @@ def send_email(text='error, empty text') -> str:
 def notification(func):
     def wrapper(*args, **kwargs):
         result = func(*args, **kwargs)
-        if result[0] == 'Error! Stop':
-            if result[1] == 1:
-                send_email(result[2])
-            sys.exit(1)
+        if result is not None:
+            if result[0] == 'Error! Stop':
+                if result[1] == 1:
+                    send_email(result[2])
+                sys.exit(1)
         return result
     return wrapper
