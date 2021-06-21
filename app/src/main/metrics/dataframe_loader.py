@@ -25,8 +25,10 @@ class LoadDataFrame:
                                table_name: str,
                                expr: str = None):
         if condition == 'actual_df':
-            return self.load_data(count_rows_for_report_date(table_name, envs.M_MODEL_ID, report_date=envs.M_REPORT_DATE))
+            return self.load_data(count_rows_for_report_date(table_name))
         elif condition == 'retro_df':
-            return self.load_data(count_rows_for_retro(table_name, envs.M_MODEL_ID, envs.M_RETRO_DATE, envs.M_REPORT_DATE))
+            return self.load_data(count_rows_for_retro(table_name, condition))
+        elif condition == 'retro_df_many_dates':
+            return self.load_data(count_rows_for_retro(table_name, condition))
         elif condition == 'df_with_expr':
             return self.load_data(count_rows_with_expr(table_name, expr))
