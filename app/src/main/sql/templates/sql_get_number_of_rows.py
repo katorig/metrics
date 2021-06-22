@@ -5,7 +5,7 @@ def count_rows_for_report_date(table_name):
     q = f"""
     SELECT Count(*) as cnt
     FROM {table_name}
-    WHERE model_id = {settings.M_MODEL_ID} AND report_date = DATE'{settings.M_REPORT_DATE}'
+    WHERE model_id = {settings.METRICS_MODEL_ID} AND report_date = DATE'{settings.METRICS_REPORT_DATE}'
     GROUP BY report_date, model_id
     """
     print(q)
@@ -15,13 +15,13 @@ def count_rows_for_report_date(table_name):
 def count_rows_for_retro(table_name,
                          condition):
     if condition == 'retro_df':
-        date_expression = f"report_date = DATE'{settings.M_RETRO_DATE}'"
+        date_expression = f"report_date = DATE'{settings.METRICS_RETRO_DATE}'"
     elif condition == 'retro_df_many_dates':
-        date_expression = f"report_date >= DATE'{settings.M_RETRO_DATE}' AND report_date < DATE'{settings.M_REPORT_DATE}'"
+        date_expression = f"report_date >= DATE'{settings.METRICS_RETRO_DATE}' AND report_date < DATE'{settings.METRICS_REPORT_DATE}'"
     q = f"""
     SELECT Count(*) as cnt
     FROM {table_name}
-    WHERE model_id = {settings.M_MODEL_ID} AND {date_expression}
+    WHERE model_id = {settings.METRICS_MODEL_ID} AND {date_expression}
     GROUP BY report_date, model_id
     """
     print(q)

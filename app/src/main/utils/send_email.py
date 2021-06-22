@@ -7,8 +7,8 @@ from dynaconf import settings
 
 def send_email(text='error, empty text') -> str:
     msg = MIMEMultipart()
-    msg['To'] = settings.M_SEND_TO
-    msg['Subject'] = f'Ошибка модели {settings.M_MODEL_ID}'
+    msg['To'] = settings.METRICS_SEND_TO
+    msg['Subject'] = f'Ошибка модели {settings.METRICS_MODEL_ID}'
     msg['From'] = settings.SEND_EMAIL_FROM
     msg_text = MIMEText(text, 'plain')
     msg.attach(msg_text)

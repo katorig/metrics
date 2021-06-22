@@ -11,16 +11,16 @@ class TestMetrics(unittest.TestCase):
         super().tearDown()
 
     def test_send_email(self):
-        settings.M_SEND_TO = "ekaterina.gruzdova@tele2.ru"
+        settings.METRICS_SEND_TO = "ekaterina.gruzdova@tele2.ru"
         self.assertEqual(send_email(text='TEST'), 'Notification was sent')
 
     def test_send_email_to_many_people(self):
-        settings.M_SEND_TO = "ekaterina.gruzdova@tele2.ru, andrey.a.bogomolov@tele2.ru"
+        settings.METRICS_SEND_TO = "ekaterina.gruzdova@tele2.ru, andrey.a.bogomolov@tele2.ru"
         self.assertEqual(send_email(text='TEST'), 'Notification was sent')
 
     def test_notification(self):
-        settings.M_SEND_TO = "ekaterina.gruzdova@tele2.ru"
-        settings.M_MODEL_ID = 'test'
+        settings.METRICS_SEND_TO = "ekaterina.gruzdova@tele2.ru"
+        settings.METRICS_MODEL_ID = 'test'
 
         @notifiable
         def foo(flag, notify=0):

@@ -14,17 +14,17 @@ def define_main_args_parser(methods_list: list) -> ArgumentParser:
                         nargs="?",
                         help=f"""
 Don't forget to assign environment variables: 
-DYNACONF_M_MODEL_ID (int)
-DYNACONF_M_STAGE_DB (teradata or hadoop)
-DYNACONF_M_STAGE_TABLE (name of stage table in format schema.table)
-DYNACONF_M_FINAL_DB (teradata or hadoop)
-DYNACONF_M_FINAL_TABLE (name of final scoring table in format schema.table)
-DYNACONF_M_REPORT_DATE (report_date in format yyyy-mm-dd)
-DYNACONF_M_RETRO_DATE (previous or retro date in format yyyy-mm-dd)
-DYNACONF_M_THRESHOLD (acceptable limit in percentage deviation between report_date scoring and retro_date scoring)
-DYNACONF_M_COLUMN (column for searching for duplicates)
-DYNACONF_M_SEND_TO (emails for notification, i.e. 'y@a.ru, i@a.ru')
-DYNACONF_M_RETRO_TYPE (type 'retro_df' or 'retro_df_many_dates' depends on with which retro dataframe you want to compare actual dataframe)
+DYNACONF_METRICS_MODEL_ID (int)
+DYNACONF_METRICS_STAGE_DB (teradata or hadoop)
+DYNACONF_METRICS_STAGE_TABLE (name of stage table in format schema.table)
+DYNACONF_METRICS_FINAL_DB (teradata or hadoop)
+DYNACONF_METRICS_FINAL_TABLE (name of final scoring table in format schema.table)
+DYNACONF_METRICS_REPORT_DATE (report_date in format yyyy-mm-dd)
+DYNACONF_METRICS_RETRO_DATE (previous or retro date in format yyyy-mm-dd)
+DYNACONF_METRICS_THRESHOLD (acceptable limit in percentage deviation between report_date scoring and retro_date scoring)
+DYNACONF_METRICS_COLUMN (column for searching for duplicates)
+DYNACONF_METRICS_SEND_TO (emails for notification, i.e. 'y@a.ru, i@a.ru')
+DYNACONF_METRICS_RETRO_TYPE (type 'retro_df' or 'retro_df_many_dates' depends on with which retro dataframe you want to compare actual dataframe)
 Type name of method you want to run.
 Possible methods: {', '.join(methods_list[1:])}.
 Default method: no_function.
