@@ -18,7 +18,7 @@ def send_email(text='error, empty text') -> str:
     return 'Notification was sent'
 
 
-def notification(func):
+def notifiable(func):
     def wrapper(*args, **kwargs):
         result = func(*args, **kwargs)
         if result is not None:

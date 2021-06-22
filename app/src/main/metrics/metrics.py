@@ -1,7 +1,7 @@
 from metrics.dataframe_loader import LoadDataFrame
 from utils.logs_maker import init_logger
 from sql.templates.sql_get_number_of_rows import count_duplicates
-from utils.send_email import notification
+from utils.send_email import notifiable
 from metrics.error_messages import *
 from dynaconf import settings
 
@@ -24,7 +24,7 @@ class Metrics:
         logger.info(f"Difference between two values is {share} %")
         return True
 
-    @notification
+    @notifiable
     def compare_new_df_with_retro(self, notify: int = 0):
         actual_df = LoadDataFrame(settings.M_STAGE_DB)\
             .get_df_with_rows_count('actual_df', settings.M_STAGE_TABLE)
@@ -37,7 +37,7 @@ class Metrics:
             logger.error(error_text_compare_with_retro)
             return 'Error! Stop', notify, error_text_compare_with_retro
 
-    @notification
+    @notifiable
     def check_if_data_in_table(self, notify: int = 0):
         ldf = LoadDataFrame(settings.M_FINAL_DB)
         df = ldf.get_df_with_rows_count('actual_df', settings.M_FINAL_TABLE)
@@ -46,7 +46,7 @@ class Metrics:
             logger.error(text)
             return 'Error! Stop', notify, text
 
-    @notification
+    @notifiable
     def check_df_for_duplicates(self, notify: int = 0):
         ldf = LoadDataFrame(settings.M_STAGE_DB)
         df = ldf.load_data(count_duplicates(settings.M_STAGE_TABLE, settings.M_COLUMN))

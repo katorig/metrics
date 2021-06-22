@@ -1,6 +1,6 @@
 from sql.templates.sql_get_number_of_rows import *
-from readers.teradata_reader import TeradataService
-from readers.hadoop_reader import HiveService
+from connectors.teradata_connector import TeradataService
+from connectors.hadoop_connector import HiveService
 from utils.logs_maker import init_logger
 
 logger = init_logger(__name__)

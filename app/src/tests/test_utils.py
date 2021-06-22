@@ -1,4 +1,4 @@
-from main.utils.send_email import send_email, notification
+from main.utils.send_email import send_email, notifiable
 import unittest
 from dynaconf import settings
 
@@ -22,7 +22,7 @@ class TestMetrics(unittest.TestCase):
         settings.M_SEND_TO = "ekaterina.gruzdova@tele2.ru"
         settings.M_MODEL_ID = 'test'
 
-        @notification
+        @notifiable
         def foo(flag, notify=0):
             print('Function foo is working')
             if flag == 1:
