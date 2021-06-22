@@ -7,7 +7,7 @@ TERADATA_USER = os.environ.get('TERADATA_USER')
 TERADATA_PASSWORD = os.environ.get('TERADATA_PASSWORD')
 
 
-class TeradataService:
+class TeradataAdapter:
 
     def __init__(self, **kwargs):
         self._kwargs = kwargs

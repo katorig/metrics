@@ -4,7 +4,7 @@ from pyhive.hive import connect
 from dynaconf import settings
 
 
-class HiveService:
+class HiveAdapter:
 
     def __init__(self, **kwargs):
         self._kwargs = kwargs
