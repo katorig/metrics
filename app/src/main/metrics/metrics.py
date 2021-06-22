@@ -2,6 +2,7 @@ from metrics.dataframe_loader import LoadDataFrame
 from utils.logs_maker import init_logger
 from sql.templates.sql_get_number_of_rows import count_duplicates
 from utils.send_email import notification
+from metrics.error_messages import *
 from dynaconf import settings as envs
 
 logger = init_logger(__name__)
