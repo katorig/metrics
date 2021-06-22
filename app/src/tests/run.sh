@@ -14,13 +14,13 @@ export DYNACONF_M_RETRO_TYPE='retro_df_many_dates'
 
 cd ../main
 chmod +x tele2_metrics.py
-
-./tele2_metrics.py check_df_for_duplicates --notify 1
-if [ $? -eq 0 ]; then
-  ./tele2_metrics.py compare_new_df_with_retro --notify 1
-else
-  echo "FAIL"
-  exit 1
-fi
-
-./tele2_metrics.py check_if_data_in_table
+./tele2_metrics.py
+#./tele2_metrics.py check_df_for_duplicates --notify 1
+#if [ $? -eq 0 ]; then
+#  ./tele2_metrics.py compare_new_df_with_retro --notify 1
+#else
+#  echo "FAIL"
+#  exit 1
+#fi
+#
+#./tele2_metrics.py check_if_data_in_table
