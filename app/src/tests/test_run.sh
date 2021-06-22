@@ -4,6 +4,7 @@ kinit -kt ../../../secrets/ekaterina.gruzdova.keytab ekaterina.gruzdova@CORP.TEL
 
 cd ../main
 chmod +x tele2_metrics.py
+./tele2_metrics.py --help
 ./tele2_metrics.py compare_new_df_with_retro --notify 1 --model_id 135 --stage_db 'hadoop' \
 --stage_table 'developers.eg_msg_traf_1' --final_db 'teradata' --final_table 'prd2_dds_v.scoring' \
 --retro_type 'retro_df_many_dates' --threshold 15 --retro_date '2021-03-04' --report_date '2021-06-04' \
