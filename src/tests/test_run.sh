@@ -2,6 +2,7 @@
 
 kinit -kt ../../secrets/ekaterina.gruzdova.keytab ekaterina.gruzdova@CORP.TELE2.RU
 
+#cd /opt/conda/envs/app-env/lib/python3.7/site-packages/tele2_metrics/
 cd ../tele2_metrics
 chmod +x tele2_metrics.py
 ./tele2_metrics.py --help
