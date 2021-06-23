@@ -6,6 +6,17 @@
 как в виде самостотельной питоновской **библиотеки**,
 так и в виде **bash-утилиты**.
 
+На данный момент, артефакт фреймворка лежит на Nexus. 
+Если хотите внести изменения в этот проект и переопубликовать его на Nexus,
+то поменяйте версию в `src/__init__.py`, а затем запустите файл 
+`how_to_send_to_nexus.sh`, предварительно указав NEXUS_USER и NEXUS_PASSWORD.
+
+Установить библиотеку можно при помощи команды 
+`pip install tele2-metrics --index-url http://nexus.t2ru-bda-wds-008.corp.tele2.ru/repository/pypi-all/simple --trusted-host nexus.t2ru-bda-wds-008.corp.tele2.ru`
+предварительно установив все зависимости, описанные в environment.yml. 
+Либо добавить установку библиотеки в сам environment.yml
+
+
 Перед использованием фреймворка необходимо 
 **авторизовать свой keytab** и добавить в окружение 
 **переменные TERADATA_USER и TERADATA_PASSWORD**.
