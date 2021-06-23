@@ -1,6 +1,6 @@
 #!/bin/bash
 
-kinit -kt ../../../secrets/ekaterina.gruzdova.keytab ekaterina.gruzdova@CORP.TELE2.RU
+kinit -kt ../../secrets/ekaterina.gruzdova.keytab ekaterina.gruzdova@CORP.TELE2.RU
 
 cd ../main
 chmod +x tele2_metrics.py
