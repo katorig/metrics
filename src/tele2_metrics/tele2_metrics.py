@@ -7,6 +7,12 @@ import sys
 
 logger = init_logger(__name__)
 
+settings.TERADATA_HOST = 'td2800.corp.tele2.ru'
+settings.SEND_EMAIL_FROM = 'metrics@info.tele2.ru'
+settings.HADOOP_HOST = 't2ru-bda-mnp-001.corp.tele2.ru'
+settings.HADOOP_PORT = 10000
+settings.KERBEROS_SERVICE_NAME = 'hive'
+settings.SASL_AUTH = 'GSSAPI'
 
 def define_main_args_parser() -> ArgumentParser:
     parser = ArgumentParser()
