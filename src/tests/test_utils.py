@@ -1,4 +1,4 @@
-from main.utils.send_email import send_email, notifiable
+from tele2_metrics.utils.send_email import send_email, notifiable
 import unittest
 from dynaconf import settings
 

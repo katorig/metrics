@@ -5,9 +5,9 @@ import codecs
 REQUIREMENTS = [
     'numpy',
     'pandas',
-    'toml',
-    'krb5',
-    'pyhive',
+    # 'toml',
+    # 'krb5',
+    # 'pyhive',
     'pure-sasl',
     'dynaconf',
     'kerberos',

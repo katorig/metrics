@@ -1,4 +1,4 @@
-from main.metrics.dataframe_loader import LoadDataFrame
+from tele2_metrics.metrics.dataframe_loader import LoadDataFrame
 import unittest
 from dynaconf import settings
 

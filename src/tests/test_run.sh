@@ -2,7 +2,7 @@
 
 kinit -kt ../../secrets/ekaterina.gruzdova.keytab ekaterina.gruzdova@CORP.TELE2.RU
 
-cd ../main
+cd ../tele2_metrics
 chmod +x tele2_metrics.py
 ./tele2_metrics.py --help
 ./tele2_metrics.py compare_new_df_with_retro --notify 1 --model_id 135 --stage_db 'hadoop' \
