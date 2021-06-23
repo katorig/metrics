@@ -12,13 +12,36 @@
 
 Пример вызова и использования утилиты лежит в `tests/test_run.sh`
 Для просмотра описания аргументов, возможных для передачи
-при запуске утилиты вызывайте `./tele2_metrics.py --help`
+при запуске утилиты, вызывайте `./tele2_metrics.py --help`
 
 Пример вызова методов в коде на Python написан в `tests/test_metrics.py`
 Как видно в примере, перед вызовом метода необходимо обогатить
 settings (dynaconf) нужными параметрами, в формате `settings.METRICS_STAGE_DB = 'teradata'`
 
 Доступные метрики на данный момент:
-- compare_new_df_with_retro (метрика по измерению падения/увеличения объема скоров)
-- check_if_data_in_table (метрика по проверке поступления данных в таблицу)
-- check_df_for_duplicates (метрика по проверке данных на наличие дублей)
+- `compare_new_df_with_retro` (метрика по измерению падения/увеличения объема скоров)\
+  Переменные: 
+  - METRICS_MODEL_ID
+  - METRICS_STAGE_DB
+  - METRICS_STAGE_TABLE
+  - METRICS_FINAL_DB
+  - METRICS_RETRO_TYPE
+  - METRICS_FINAL_TABLE
+  - METRICS_THRESHOLD
+  - METRICS_RETRO_DATE
+  - METRICS_REPORT_DATE
+  - METRICS_SEND_TO - опционально
+- `check_if_data_in_table` (метрика по проверке поступления данных в таблицу)\
+  Переменные:
+  - METRICS_MODEL_ID
+  - METRICS_FINAL_DB
+  - METRICS_FINAL_TABLE
+  - METRICS_REPORT_DATE
+  - METRICS_SEND_TO - опционально
+- `check_df_for_duplicates` (метрика по проверке данных на наличие дублей)\
+  Переменные:
+  - METRICS_MODEL_ID
+  - METRICS_FINAL_DB
+  - METRICS_FINAL_TABLE
+  - METRICS_REPORT_DATE
+  - METRICS_SEND_TO - опционально
