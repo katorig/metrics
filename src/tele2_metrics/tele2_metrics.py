@@ -46,9 +46,9 @@ If you want to send notification add --notify parameter.""",
                         help="""acceptable limit in percentage deviation 
                         between report_date scoring and retro_date scoring""")
     parser.add_argument('--column', metavar='column', type=str, default=None,
-                        help="column for searching for duplicates")
+                        help="type columns which we have to group by to find duplicates. i.e. 'segment_id,subs_id'")
     parser.add_argument('--send_to', metavar='send_to', type=str, default=None,
-                        help="emails for notification, i.e. 'y@a.ru, i@a.ru'")
+                        help="emails for notification, i.e. 'y@a.ru,i@a.ru'")
     parser.add_argument('--retro_type', metavar='retro_type', type=str, default=None,
                         help="""
                         type 'retro_df' or 'retro_df_many_dates' depends on 

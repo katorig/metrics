@@ -12,7 +12,7 @@ chmod +x tele2_metrics.py
 --send_to 'ekaterina.gruzdova@tele2.ru'
 if [ $? -eq 0 ]; then
   ./tele2_metrics.py check_df_for_duplicates --notify 1 --model_id 135 --stage_db 'hadoop' \
-  --stage_table 'developers.eg_msg_traf_1' --column 'subs_id' --send_to 'ekaterina.gruzdova@tele2.ru'
+  --stage_table 'developers.eg_msg_traf_1' --column 'segment_id,subs_id' --send_to 'ekaterina.gruzdova@tele2.ru'
 else
   echo 'FAIL'
   exit 1
