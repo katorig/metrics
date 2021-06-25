@@ -27,7 +27,9 @@
 
 Пример вызова методов в коде на Python написан в `tests/test_metrics.py`
 Как видно в примере, перед вызовом метода необходимо обогатить
-settings (dynaconf) нужными параметрами, в формате `settings.METRICS_STAGE_DB = 'teradata'`
+settings (dynaconf) нужными параметрами, в формате `settings.METRICS_STAGE_DB = 'teradata'`. Также необходимо добавлять settings.toml с переменными dynaconf в проект модели (пример лежит в config/settings.toml), если используется фреймворк в качестве библиотеки прямо в коде.
+
+Пока что не подключена возможность использования teradata по ldap и не было тестирования в Windows. В скором времени исправим.
 
 Доступные метрики на данный момент:
 - `compare_new_df_with_retro` (метрика по измерению падения/увеличения объема скоров)\
@@ -56,3 +58,5 @@ settings (dynaconf) нужными параметрами, в формате `se
   - METRICS_FINAL_TABLE
   - METRICS_REPORT_DATE
   - METRICS_SEND_TO - опционально
+
+При возникновении вопросов пишите Кате Груздовой в слаке или на имейл: ekaterina.gruzdova@tele2.ru 
