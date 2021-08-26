@@ -1,4 +1,4 @@
-from main.metrics.metrics import Metrics
+from tele2_metrics.metrics.metrics import Metrics
 import unittest
 import pandas
 from dynaconf import settings
