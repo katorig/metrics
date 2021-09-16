@@ -7,4 +7,4 @@ conda env create -f environment.yml -n ${conda_env} && conda clean -af
 
 kinit -kt secrets/${HADOOP_USER_NAME}.keytab ${HADOOP_USER_NAME}@CORP.TELE2.RU
 
-#conda run --no-capture-output -n app-env python src/tele2_metrics/file.py
+#conda run --no-capture-output -n app-env python src/tele2_metrics/<file>.py

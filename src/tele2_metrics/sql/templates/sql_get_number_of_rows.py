@@ -34,6 +34,7 @@ def count_rows_with_expr(table_name, expression):
     FROM {table_name}
     {expression}
     """
+    print(q)
     return q
 
 
@@ -46,4 +47,5 @@ def count_duplicates(table_name, col_name):
         HAVING Cnt > 1 
     ) t
     """
+    print(q)
     return q

@@ -1,18 +1,18 @@
-from sql.templates.sql_get_number_of_rows import *
-from connectors.teradata_connector import TeradataAdapter
-from connectors.hadoop_connector import HiveAdapter
-from utils.logs_maker import init_logger
+from tele2_metrics.sql.templates.sql_get_number_of_rows import *
+from tele2_metrics.connectors.teradata_connector import TeradataAdapter
+from tele2_metrics.connectors.hadoop_connector import HiveAdapter
+from tele2_metrics.utils.logs_maker import init_logger
 
 logger = init_logger(__name__)
 
 
 class LoadDataFrame:
     def __init__(self,
-                 db):
+                 db, conn_lib='teradatasql'):
         if db == 'hadoop':
             self.db = HiveAdapter()
         elif db == 'teradata':
-            self.db = TeradataAdapter()
+            self.db = TeradataAdapter(conn_lib)
 
     def load_data(self, query: str):
         with self.db as service:

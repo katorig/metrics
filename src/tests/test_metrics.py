@@ -32,6 +32,7 @@ class TestMetrics(unittest.TestCase):
         settings.METRICS_MODEL_ID = 326
         settings.METRICS_REPORT_DATE = '2021-05-17'
         settings.METRICS_RETRO_DATE = '2021-03-17'
+        self.assertIsNone(mtr.compare_new_df_with_retro(conn_lib='turbodbc'))
         self.assertIsNone(mtr.compare_new_df_with_retro())
         settings.METRICS_THRESHOLD = 0
         self.assertRaises(SystemExit, lambda: mtr.compare_new_df_with_retro())
@@ -44,6 +45,7 @@ class TestMetrics(unittest.TestCase):
         self.assertRaises(SystemExit, lambda: mtr.check_if_data_in_table())
         self.assertRaises(SystemExit, lambda: mtr.check_if_data_in_table(1))
         settings.METRICS_REPORT_DATE = '2021-03-17'
+        self.assertIsNone(mtr.check_if_data_in_table(conn_lib='turbodbc'))
         self.assertIsNone(mtr.check_if_data_in_table())
 
     def test_check_df_for_duplicates(self):
@@ -54,7 +56,9 @@ class TestMetrics(unittest.TestCase):
         settings.METRICS_STAGE_TABLE = 'PRD2_TMD_V.BDS_LOAD_STATUS'
         settings.METRICS_COLUMN = 'table_name'
         b = mtr.check_df_for_duplicates()
+        a = mtr.check_df_for_duplicates(conn_lib='turbodbc')
         self.assertIsNone(b)
+        self.assertIsNone(a)
 
 
 if __name__ == '__main__':
