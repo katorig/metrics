@@ -1,6 +1,5 @@
 from pandas import DataFrame
 import teradatasql
-import turbodbc as tbd
 import os
 from dynaconf import settings
 
@@ -31,6 +30,7 @@ class TeradataAdapter:
 
     def _connect(self):
         if self.conn_lib == 'turbodbc':
+            import turbodbc as tbd
             params = {}
             # if settings.LOGIN_TYPE == 'domen':
             #     params['authentication'] = 'LDAP'
