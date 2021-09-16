@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 from argparse import ArgumentParser
-from utils.logs_maker import init_logger
+from tele2_metrics.utils.logs_maker import init_logger
 from dynaconf import settings
 import sys
 
@@ -79,7 +79,7 @@ if __name__ == '__main__':
     settings.METRICS_COLUMN = args.column
     settings.METRICS_SEND_TO = args.send_to
     settings.METRICS_RETRO_TYPE = args.retro_type
-    from metrics.metrics import Metrics
+    from tele2_metrics.metrics.metrics import Metrics
     mtr = Metrics()
     methods_dict = {"no_function": foo,
                     "check_df_for_duplicates": mtr.check_df_for_duplicates,

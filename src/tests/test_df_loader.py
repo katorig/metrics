@@ -11,6 +11,9 @@ class TestLoadDataFrame(unittest.TestCase):
         super().tearDown()
 
     def test_load_data_teradata(self):
+        l = LoadDataFrame('teradata', conn_lib='turbodbc')
+        df_h = l.load_data("SELECT TOP 2 * FROM prd2_dds_v.scoring")
+        self.assertEqual(df_h.shape[0], 2)
         l = LoadDataFrame('teradata')
         df_h = l.load_data("SELECT TOP 2 * FROM prd2_dds_v.scoring")
         self.assertEqual(df_h.shape[0], 2)
