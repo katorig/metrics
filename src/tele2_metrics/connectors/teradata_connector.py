@@ -3,9 +3,6 @@ import teradatasql
 import os
 from dynaconf import settings
 
-TERADATA_USER = os.environ.get('TERADATA_USER')
-TERADATA_PASSWORD = os.environ.get('TERADATA_PASSWORD')
-
 
 class TeradataAdapter:
 
@@ -29,6 +26,14 @@ class TeradataAdapter:
             cursor.execute(operation)
 
     def _connect(self):
+        if os.environ.get('TERADATA_USER') is None:
+            TERADATA_USER = settings.TERADATA_USER
+        else:
+            TERADATA_USER = os.environ.get('TERADATA_USER')
+        if os.environ.get('TERADATA_PASSWORD') is None:
+            TERADATA_PASSWORD = settings.TERADATA_PASSWORD
+        else:
+            TERADATA_PASSWORD = os.environ.get('TERADATA_PASSWORD')
         if self.conn_lib == 'turbodbc':
             import turbodbc as tbd
             params = {}
