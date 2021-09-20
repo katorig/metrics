@@ -10,16 +10,12 @@ class HiveAdapter:
         self._kwargs = kwargs
         self._con = None
 
-    def execute_query(self, operation):
+    def execute_query(self, operation):  # pragma: no cover
         with self._con.cursor() as cursor:
             cursor.execute(operation)
             table = DataFrame(cursor.fetchall(),
                               columns=[x[0] for x in cursor.description])
             return table
-
-    def execute_ddl(self, operation):
-        with self._con.cursor() as cursor:
-            cursor.execute(operation)
 
     def _connect(self):
         transport = transport_factory(host=settings.HADOOP_HOST, port=settings.HADOOP_PORT,
@@ -28,11 +24,11 @@ class HiveAdapter:
                                       **self._kwargs)
         return connect(thrift_transport=transport)
 
-    def __enter__(self):
+    def __enter__(self):  # pragma: no cover
         self._con = self._connect()
         return self
 
-    def __exit__(self, *args, **kwargs):
+    def __exit__(self, *args, **kwargs):  # pragma: no cover
         self._con.close()
         self._con = None
         return False
