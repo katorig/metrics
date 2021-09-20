@@ -36,19 +36,22 @@ class TeradataAdapter:
             TERADATA_PASSWORD = os.environ.get('TERADATA_PASSWORD')
         if self.conn_lib == 'turbodbc':
             import turbodbc as tbd
-            params = {}
-            # if settings.LOGIN_TYPE == 'domen':
-            #     params['authentication'] = 'LDAP'
             connection_string = f"""DSN=Teradata;DBCName={settings.TERADATA_HOST};
 UID={TERADATA_USER};PWD={TERADATA_PASSWORD};CharacterSet=UTF8"""
             return tbd.connect(connection_string=connection_string,
-                               **params,
                                turbodbc_options=tbd.make_options(prefer_unicode=True, autocommit=True))
         elif self.conn_lib == 'teradatasql':
-            return teradatasql.connect(None,
-                                       host=settings.TERADATA_HOST,
-                                       user=TERADATA_USER,
-                                       password=TERADATA_PASSWORD)
+            if settings.exists('LOGIN_TYPE') and settings.LOGIN_TYPE == 'domen':
+                return teradatasql.connect(None,
+                                           host=settings.TERADATA_HOST,
+                                           user=TERADATA_USER,
+                                           password=TERADATA_PASSWORD,
+                                           logmech="LDAP")
+            else:
+                return teradatasql.connect(None,
+                                           host=settings.TERADATA_HOST,
+                                           user=TERADATA_USER,
+                                           password=TERADATA_PASSWORD)
 
     def __enter__(self):
         self._con = self._connect()
