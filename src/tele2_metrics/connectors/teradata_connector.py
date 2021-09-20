@@ -26,13 +26,11 @@ class TeradataAdapter:
             cursor.execute(operation)
 
     def _connect(self):
-        if os.environ.get('TERADATA_USER') is None:
+        if os.environ.get('TERADATA_USER') is None or os.environ.get('TERADATA_PASSWORD') is None:
             TERADATA_USER = settings.TERADATA_USER
-        else:
-            TERADATA_USER = os.environ.get('TERADATA_USER')
-        if os.environ.get('TERADATA_PASSWORD') is None:
             TERADATA_PASSWORD = settings.TERADATA_PASSWORD
         else:
+            TERADATA_USER = os.environ.get('TERADATA_USER')
             TERADATA_PASSWORD = os.environ.get('TERADATA_PASSWORD')
         if self.conn_lib == 'turbodbc':
             import turbodbc as tbd
