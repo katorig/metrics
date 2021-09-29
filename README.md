@@ -12,7 +12,7 @@
 `how_to_send_to_nexus.sh`, предварительно указав NEXUS_USER и NEXUS_PASSWORD.
 
 Установить библиотеку можно при помощи команды 
-`pip install tele2-metrics --index-url http://nexus.t2ru-bda-wds-008.corp.tele2.ru/repository/pypi-all/simple --trusted-host nexus.t2ru-bda-wds-008.corp.tele2.ru`
+`pip install tele2-metrics --index-url <url> --trusted-host <url>`
 предварительно установив все зависимости, описанные в environment.yml. 
 Либо добавить установку библиотеки в сам environment.yml
 
@@ -29,7 +29,7 @@
 Как видно в примере, перед вызовом метода необходимо обогатить
 settings (dynaconf) нужными параметрами, в формате `settings.METRICS_STAGE_DB = 'teradata'`. Также необходимо добавлять settings.toml с переменными dynaconf в проект модели (пример лежит в config/settings.toml), если используется фреймворк в качестве библиотеки прямо в коде.
 
-Пока что не подключена возможность использования teradata по ldap и не было тестирования в Windows. В скором времени исправим.
+Пока что не было тестирования в Windows. В скором времени исправим.
 
 Доступные метрики на данный момент:
 - `compare_new_df_with_retro` (метрика по измерению падения/увеличения объема скоров)\
