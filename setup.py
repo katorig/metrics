@@ -43,7 +43,7 @@ setup(
     description='Framework for models metrics and monitoring',
     author='Ekaterina Gruzdova',
     author_email='bde@tele2.ru',
-    url="https://gitlab.tdp.corp.tele2.ru/mle/tele2_dvv_monitoring",
+    url="git",
     license='LICENSE.txt',
     package_dir={"": "src"},
     packages=find_packages(

@@ -1,10 +1,10 @@
 [default]
-teradata_host = 'td2800.corp.tele2.ru'
+teradata_host = ''
 send_email_from = 'metrics@info.tele2.ru'
-hadoop_host = 't2ru-bda-mnp-001.corp.tele2.ru'
-hadoop_port = 10000
+hadoop_host = ''
+hadoop_port = 0
 kerberos_service_name = 'hive'
-sasl_auth = 'GSSAPI'
+sasl_auth = ''
 
 METRICS_MODEL_ID=135
 METRICS_STAGE_DB='hadoop'
